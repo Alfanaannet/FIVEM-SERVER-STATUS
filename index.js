@@ -13,7 +13,7 @@ app.use("/ping", (req, res) => {
   res.send(new Date());
 });
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("server started");
 });
 const printValues = function (values, text) {
