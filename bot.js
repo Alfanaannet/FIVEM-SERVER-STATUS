@@ -196,7 +196,7 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
     if (STATUS !== undefined)
     {
       embed.addFields(
-        { name: '📬 Server Notice:',   value: `\`\`\`${STATUS}\`\`\`\n\u200b\n`, inline: false }
+        { name: '📬 Server Notice:',   value: `\`\`\`${STATUS}\`\`\``, inline: false }
       );
       embed.setColor('#00f931')
     }
@@ -226,7 +226,7 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
         let embed = UpdateEmbed()
         .addFields(
           { name: "Server Status",            value: "```✅ Online```",                                                                                    inline: true },
-          { name: "Online Players",           value: `\`\`\`${players.length}/${MAX_PLAYERS}\`\`\`\n\u200b\n`,                                              inline: true },
+          { name: "Online Players",           value: `\`\`\`${players.length}/${MAX_PLAYERS}\`\`\``,                                              inline: true },
           { name: "Server Restart Times:",    value: `\`\`\`${RESTART_TIMES}\`\`\``,                                                                        inline: true }
           )
         .setThumbnail(SERVER_LOGO)
@@ -245,6 +245,7 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
                 .setLabel('Website')
                 .setURL(WEBSITE_URL)
                 .setStyle('LINK')
+                .setEmoji('1117675924058558474')
             );
           sendOrUpdate(embed, row);
           
@@ -287,7 +288,7 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
    /////////////////////////////////////////////////////
    ➼ Bot has been started and will attempt to connect to the server...`)}
     `) 
-
+      bot.user.setAvatar(SERVER_LOGO)
        bot.user.setPresence({
       activities: [{
          name: `${SERVER_NAME}`,
