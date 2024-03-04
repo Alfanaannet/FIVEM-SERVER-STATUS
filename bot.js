@@ -250,7 +250,15 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
           sendOrUpdate(embed, row);
           
         } else {
-          sendOrUpdate(embed);
+         const row = new MessageActionRow()
+            .addComponents(
+              new MessageButton()
+                .setLabel('Fivem Connect')
+                .setURL(WEBSITE_URL)
+                .setStyle('LINK')
+                .setEmoji('1117675924058558474')
+            );
+          sendOrUpdate(embed, row);
         }
        
         LAST_COUNT = players.length;
