@@ -242,7 +242,7 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
           const row = new MessageActionRow()
             .addComponents(
               new MessageButton()
-                .setLabel('Website')
+                .setLabel('Fivem Connect')
                 .setURL(WEBSITE_URL)
                 .setStyle('LINK')
                 .setEmoji('1117675924058558474')
