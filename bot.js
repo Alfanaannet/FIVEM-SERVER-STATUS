@@ -185,10 +185,10 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
 })
   const UpdateEmbed = function() {
     let embed = new Discord.MessageEmbed()
-    .setAuthor({ name: `${SERVER_NAME} | Server Status`, iconURL: SERVER_LOGO })
+    .setAuthor({ name: `${SERVER_NAME}`, iconURL: SERVER_LOGO })
     .setColor(EMBED_COLOR)
     .setThumbnail(SERVER_LOGO)
-    .setFooter({ text: TICK_N % 2 === 0 ? `${SERVER_NAME}` : `${SERVER_NAME}` })
+    .setFooter({ text: TICK_N % 2 === 0 ? `AW | CITY STATUS` : `${SERVER_NAME}` })
     .setTimestamp(new Date())
     .addFields(
         { name: '\n\u200b\nServer Name',  value: `\`\`\`${SERVER_NAME}\`\`\``, inline: false} 
