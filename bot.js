@@ -239,7 +239,7 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
         .setThumbnail(SERVER_LOGO)
         bot.user.setPresence({
       activities: [{
-         name: `[${players.length}/${MAX_PLAYERS}] PLAYERS`,
+         name: `PLAYERS [${players.length}/${MAX_PLAYERS}] On Aw-RP`,
           type: "CUSTOM"
       }], status: "idle"
        })
