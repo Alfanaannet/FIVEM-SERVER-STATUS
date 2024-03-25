@@ -217,7 +217,14 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
     sendOrUpdate(embed);
     console.log(`${chalk.bgRed(`[Error]`)} ${chalk.red(`Server is offline..`)}`)
     LAST_COUNT = null;
+    bot.user.setPresence({
+      activities: [{
+         name: `${SERVER_NAME}`,
+          type: "CUSTOM"
+      }], status: "idle"
+       })
   };
+  
 
   const updateMessage = function() {
     getVars().then((vars) => {
@@ -230,6 +237,12 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
           { name: "Server Restart Times:",    value: `\`\`\`${RESTART_TIMES}\`\`\``,                                                                        inline: true }
           )
         .setThumbnail(SERVER_LOGO)
+        bot.user.setPresence({
+      activities: [{
+         name: `[${players.length}/${MAX_PLAYERS}] PLAYERS`,
+          type: "CUSTOM"
+      }], status: "idle"
+       })
         if (players.length > 0 && SHOW_PLAYERS == true && players.length < 4080) {
           let playersOnline = [];
           for (var i=0; i < players.length; i++) {
