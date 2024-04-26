@@ -135,6 +135,7 @@ exports.start = function(SETUP) {
     });
   };
 
+
   const bot = new Discord.Client({
     allowedMentions: {
       parse: ["roles", "users", "everyone"],
