@@ -9,21 +9,7 @@ const chalk = require('chalk');
 const express = require("express");
 const app = express();
 
-app.get("/info", function (req, res) {
-   getVars().then((vars) => {
 
-      res.send(vars);
-     
-   });
-                  
-});
-app.get("/player", function (req, res) {
-  getPlayers().then((data) => {
-
-      res.send(data);
-     
-   });
-});
 app.use("/ping", (req, res) => {
   res.send(new Date());
 });
@@ -152,7 +138,21 @@ exports.start = function(SETUP) {
     });
   };
 
+app.get("/info", function (req, res) {
+   getVars().then((vars) => {
 
+      res.send(vars);
+     
+   });
+                  
+});
+app.get("/player", function (req, res) {
+  getPlayers().then((data) => {
+
+      res.send(data);
+     
+   });
+});
   const bot = new Discord.Client({
     allowedMentions: {
       parse: ["roles", "users", "everyone"],
