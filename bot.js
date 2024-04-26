@@ -15,6 +15,10 @@ app.get("/info", function (req, res) {
 app.get("/player", function (req, res) {
   res.send(getPlayers());
 });
+app.use("/ping", (req, res) => {
+  res.send(new Date());
+});
+
 
 // ---------------------------------------------------------------------
 const USER_AGENT = `FSS bot ${require('./package.json').version} , Node ${process.version} (${process.platform}${process.arch})`;
