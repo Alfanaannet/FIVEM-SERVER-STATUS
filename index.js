@@ -9,9 +9,6 @@ app.get("/", function (req, res) {
   res.send("Hello Express app!");
 });
 
-app.use("/ping", (req, res) => {
-  res.send(new Date());
-});
 
 app.listen(3001, () => {
   console.log("server started");
