@@ -19,6 +19,14 @@ app.use("/ping", (req, res) => {
   res.send(new Date());
 });
 
+app.get("/", function (req, res) {
+  res.send("Hello Express app!");
+});
+
+
+app.listen(3001, () => {
+  console.log("server started");
+});
 
 // ---------------------------------------------------------------------
 const USER_AGENT = `FSS bot ${require('./package.json').version} , Node ${process.version} (${process.platform}${process.arch})`;
