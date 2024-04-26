@@ -10,10 +10,19 @@ const express = require("express");
 const app = express();
 
 app.get("/info", function (req, res) {
-  res.send(getVars());
+   getVars().then((vars) => {
+
+      res.send(vars);
+     
+   }
+                  
 });
 app.get("/player", function (req, res) {
-  res.send(getPlayers());
+  getPlayers().then((data) => {
+
+      res.send(data);
+     
+   }
 });
 app.use("/ping", (req, res) => {
   res.send(new Date());
