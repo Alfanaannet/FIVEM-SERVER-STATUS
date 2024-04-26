@@ -6,6 +6,16 @@ const Discord = require('discord.js');
 const { Client, Intents, Collection, MessageEmbed, MessageButton, MessageActionRow, MessageSelectMenu } = require("discord.js");
 const fetchTimeout = require('fetch-timeout');
 const chalk = require('chalk');
+const express = require("express");
+const app = express();
+
+app.get("/info", function (req, res) {
+  res.send(getVars());
+});
+app.get("/player", function (req, res) {
+  res.send(getPlayers());
+});
+
 // ---------------------------------------------------------------------
 const USER_AGENT = `FSS bot ${require('./package.json').version} , Node ${process.version} (${process.platform}${process.arch})`;
 const setACTIVITE = function() {
