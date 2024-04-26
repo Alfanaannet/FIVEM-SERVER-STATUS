@@ -5,14 +5,7 @@ const chalk = require("chalk");
 const express = require("express");
 const app = express();
 
-app.get("/", function (req, res) {
-  res.send("Hello Express app!");
-});
 
-
-app.listen(3001, () => {
-  console.log("server started");
-});
 const printValues = function (values, text) {
   console.log(text ? text : "Current values:");
   for (var key in values) {
