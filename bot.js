@@ -14,7 +14,7 @@ app.get("/info", function (req, res) {
 
       res.send(vars);
      
-   }
+   });
                   
 });
 app.get("/player", function (req, res) {
@@ -22,7 +22,7 @@ app.get("/player", function (req, res) {
 
       res.send(data);
      
-   }
+   });
 });
 app.use("/ping", (req, res) => {
   res.send(new Date());
