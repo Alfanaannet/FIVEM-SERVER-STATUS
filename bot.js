@@ -69,7 +69,7 @@ exports.start = function(SETUP) {
   const BUG_CHANNEL = SETUP.BUG_CHANNEL;
   const BUG_LOG_CHANNEL = SETUP.BUG_LOG_CHANNEL;
   const LOG_CHANNEL = SETUP.LOG_CHANNEL;
-  const URL_PLAYERS = new URL('/players.json', SETUP.URL_SERVER).toString();
+  const URL_PLAYERS = new URL(SETUP.URL_SERVER).toString();
   const URL_INFO = new URL('/info.json', SETUP.URL_SERVER).toString();
   /////////////////////////////////////////////////////
   const SERVER_OFFLINE_ERROR = `Server offline ${URL_SERVER} (${URL_PLAYERS} ${URL_INFO})
@@ -98,7 +98,7 @@ exports.start = function(SETUP) {
     return new Promise((resolve,reject) => {
       fetchTimeout(URL_PLAYERS, FETCH_TIMEOUT).then((res) => {
         res.json().then((players) => {
-          resolve(players);
+          resolve(players.Data.players);
         }).catch((e) => { 
           if(DEBUG != false) {
           console.log(`${chalk.bgRed(`[ERROR]`)} ${chalk.red(`❌ node-fetch was unable to get player info...\nError: ${e.stack}`)}`)
