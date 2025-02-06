@@ -118,7 +118,6 @@ exports.start = function(SETUP) {
       axios.get(url, { headers })
         .then(response => {
           resolve(response.data.Data.players);
-          console.log(response.data.Data.players);
         })
         .catch(error => {
           offline();
