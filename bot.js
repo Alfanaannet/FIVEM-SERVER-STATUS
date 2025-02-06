@@ -8,6 +8,7 @@ const fetchTimeout = require('fetch-timeout');
 const chalk = require('chalk');
 const express = require("express");
 const app = express();
+require('dotenv').config()
 
 
 app.use("/ping", (req, res) => {
@@ -69,10 +70,10 @@ exports.start = function(SETUP) {
   const BUG_CHANNEL = SETUP.BUG_CHANNEL;
   const BUG_LOG_CHANNEL = SETUP.BUG_LOG_CHANNEL;
   const LOG_CHANNEL = SETUP.LOG_CHANNEL;
-  const URL_PLAYERS = new URL(SETUP.URL_SERVER).toString();
+  // const URL_PLAYERS = new URL().toString();
   const URL_INFO = new URL('/info.json', SETUP.URL_SERVER).toString();
   /////////////////////////////////////////////////////
-  const SERVER_OFFLINE_ERROR = `Server offline ${URL_SERVER} (${URL_PLAYERS} ${URL_INFO})
+  const SERVER_OFFLINE_ERROR = `Server offline ${URL_SERVER} (${URL_INFO})
   \nPlease check that you do not have a firewall blocking connections to the port of the server.
   \nPlease also ensure you can access ${URL_SERVER} in a web browser, if you cannot please ensure nothing is blocking that port from being accessed like a firewall.`
   /////////////////////////////////////////////////////
@@ -93,26 +94,53 @@ exports.start = function(SETUP) {
   var STATUS;
 
   var loop_callbacks = [];
+  const axios = require('axios');
+
+  const url = 'https://servers-frontend.fivem.net/api/servers/single/94mave';
+
+  const headers = {
+    'Accept': '*/*',
+    'Accept-Encoding': 'gzip, deflate, br, zstd',
+    'Accept-Language': 'en-AU,en;q=0.9,ar-AE;q=0.8,ar-EG;q=0.7,ar;q=0.6,en-GB;q=0.5,en-US;q=0.4',
+    'Origin': 'https://servers.fivem.net',
+    'Referer': 'https://servers.fivem.net/',
+    'Sec-CH-UA': '"Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"',
+    'Sec-CH-UA-Mobile': '?0',
+    'Sec-CH-UA-Platform': '"Windows"',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-site',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36'
+  };
 
   const getPlayers = function() {
     return new Promise((resolve,reject) => {
-      fetchTimeout(URL_PLAYERS, FETCH_TIMEOUT).then((res) => {
-        res.json().then((players) => {
-          resolve(players.Data.players);
-        }).catch((e) => { 
-          if(DEBUG != false) {
-          console.log(`${chalk.bgRed(`[ERROR]`)} ${chalk.red(`❌ node-fetch was unable to get player info...\nError: ${e.stack}`)}`)
-        } else {
+      axios.get(url, { headers })
+        .then(response => {
+          resolve(response.data.Data.players);
+          console.log(response.data.Data.players);
+        })
+        .catch(error => {
           offline();
-        }
-            });
-      }).catch((e) => { 
-        if(DEBUG != false) {
-          console.log(`${chalk.bgRed(`[ERROR]`)} ${chalk.red(`❌ node-fetch was unable to get player info...\nError: ${e.stack}`)}`)
-        } else {
-          offline();
-        }
         });
+      // fetchTimeout(SETUP.URL_SERVER, FETCH_TIMEOUT).then((res) => {
+      //   console.log(res)
+      //   res.json().then((players) => {
+      //     resolve(players.Data.players);
+      //   }).catch((e) => { 
+      //     if(DEBUG != false) {
+      //     console.log(`${chalk.bgRed(`[ERROR]`)} ${chalk.red(`❌ node-fetch was unable to get player info...\nError: ${e.stack}`)}`)
+      //   } else {
+      //     offline();
+      //   }
+      // });
+      // }).catch((e) => { 
+      //   if(DEBUG != false) {
+      //     console.log(`${chalk.bgRed(`[ERROR]`)} ${chalk.red(`❌ node-fetch was unable to get player info...\nError: ${e.stack}`)}`)
+      //   } else {
+      //     offline();
+      //   }
+      //   });
     })
   };
 
@@ -259,8 +287,7 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
   
 
   const updateMessage = function() {
-    getVars().then((vars) => {
-      getPlayers().then((players) => {
+    getPlayers().then((players) => {
         if (players.length !== LAST_COUNT) console.log(`${chalk.bgBlue('[INFO]')} ${chalk.blue(`${players.length} players`)}`);
         let embed = UpdateEmbed()
         .addFields(
@@ -299,7 +326,6 @@ var checkMe = ['ADMINISTRATOR','CREATE_INSTANT_INVITE','KICK_MEMBERS','BAN_MEMBE
         }
        
         LAST_COUNT = players.length;
-      }).catch(offline);
     }).catch(offline);
     TICK_N++;
     if (TICK_N >= TICK_MAX) {
