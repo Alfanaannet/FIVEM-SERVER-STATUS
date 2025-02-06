@@ -8,7 +8,6 @@ const fetchTimeout = require('fetch-timeout');
 const chalk = require('chalk');
 const express = require("express");
 const app = express();
-require('dotenv').config()
 
 
 app.use("/ping", (req, res) => {
